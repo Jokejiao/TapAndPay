@@ -15,3 +15,5 @@ dependencyResolutionManagement {
 }
 rootProject.name = "TapAndPay"
 include(":app")
+include(":feature:tap")
+include(":mylibrary")

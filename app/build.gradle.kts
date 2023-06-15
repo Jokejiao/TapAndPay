@@ -69,8 +69,8 @@ android {
 }
 
 dependencies {
-//    implementation(project(":feature:interests"))
-//    implementation(project(":feature:foryou"))
+    implementation(project(":feature:tap"))
+    //    implementation(project(":feature:foryou"))
 //    implementation(project(":feature:bookmarks"))
 //    implementation(project(":feature:topic"))
 //    implementation(project(":feature:search"))
