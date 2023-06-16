@@ -17,3 +17,4 @@ rootProject.name = "TapAndPay"
 include(":app")
 include(":feature:tap")
 include(":mylibrary")
+include(":data:nfc")

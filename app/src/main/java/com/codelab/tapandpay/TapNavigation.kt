@@ -10,9 +10,9 @@ import com.codelab.tapandpay.TapScreens.TAP_SCREEN
  * Screens used in [TodoDestinations]
  */
 private object TapScreens {
-    const val TAP_SCREEN = "tapCard"
-    const val DATA_SCREEN = "data"
-    const val MESSAGE_SCREEN = "message"
+    const val TAP_SCREEN = "tap_card"
+    const val DATA_SCREEN = "data_display"
+    const val MESSAGE_SCREEN = "message_user"
 }
 
 /**
@@ -37,5 +37,9 @@ class TapNavigationActions(private val navController: NavController) {
 
     fun navigateToData() {
         navController.navigate(TapDestinations.DATA_ROUTE)
+    }
+
+    fun navigateToMessage() {
+        navController.navigate(TapDestinations.MESSAGE_ROUTE)
     }
 }
