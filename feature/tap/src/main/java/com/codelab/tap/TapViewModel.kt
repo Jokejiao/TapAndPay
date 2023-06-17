@@ -1,18 +1,36 @@
 package com.codelab.tap
 
-import android.util.Log
+import android.app.Activity
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
-import com.codelab.nfc.NfcRepository
+import androidx.lifecycle.viewModelScope
+import com.codelab.nfcreader.NfcStatus
+import com.codelab.nfcreader.StartNfcReaderUseCase
+import com.codelab.nfcreader.StopNfcReaderUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class TapViewModel @Inject constructor(
-    private val nfcRepository: NfcRepository
+    private val startNfcReaderUseCase: StartNfcReaderUseCase,
+    private val stopNfcReaderUseCase: StopNfcReaderUseCase
 ) : ViewModel() {
 
-    init {
-        Log.i("Alex", "abc")
+    var uiState by mutableStateOf(NfcStatus.NFC_OK)
+        private set
 
+    fun startNfcReader(activity: Activity) {
+        viewModelScope.launch {
+            uiState = startNfcReaderUseCase(activity)
+        }
+    }
+
+    fun stopNfcReader(activity: Activity) {
+        viewModelScope.launch {
+            stopNfcReaderUseCase(activity)
+        }
     }
 }

@@ -29,11 +29,11 @@ import kotlinx.coroutines.CoroutineScope
 
 @Composable
 fun TapNavGraph(
-    lifecycleOwner: LifecycleOwner = LocalLifecycleOwner.current,
+    activity: MainActivity,
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController(),
     coroutineScope: CoroutineScope = rememberCoroutineScope(),
-    startDestination: String = TapDestinations.DATA_ROUTE,
+    startDestination: String = TapDestinations.TAP_ROUTE,
     navActions: TapNavigationActions = remember(navController) {
         TapNavigationActions(navController)
     }
@@ -44,15 +44,13 @@ fun TapNavGraph(
         modifier = modifier
     ) {
         composable(TapDestinations.TAP_ROUTE) {
-            Log.i("Alex", "123")
-            TapScreen()
+            TapScreen(activity = activity)
         }
         composable(TapDestinations.DATA_ROUTE) {
             DataScreen {
                 navActions.navigateToMessage()
             }
         }
-
         composable(TapDestinations.MESSAGE_ROUTE) {
             MessageScreen()
         }

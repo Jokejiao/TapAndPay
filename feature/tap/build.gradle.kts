@@ -11,4 +11,5 @@ android {
 dependencies {
     implementation(libs.androidx.activity.compose)
     implementation(project(":data:nfc"))
+    implementation(project(":domain:nfcreader"))
 }
