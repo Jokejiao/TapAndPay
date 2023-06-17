@@ -33,13 +33,17 @@ object TapDestinations {
     const val MESSAGE_ROUTE = MESSAGE_SCREEN
 }
 
+var currentRoute: String? = TapDestinations.TAP_ROUTE
+
 class TapNavigationActions(private val navController: NavController) {
 
     fun navigateToData() {
         navController.navigate(TapDestinations.DATA_ROUTE)
+        currentRoute = TapDestinations.DATA_ROUTE
     }
 
     fun navigateToMessage() {
         navController.navigate(TapDestinations.MESSAGE_ROUTE)
+        currentRoute = TapDestinations.MESSAGE_ROUTE
     }
 }

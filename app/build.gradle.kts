@@ -70,6 +70,7 @@ android {
 
 dependencies {
     implementation(project(":feature:tap"))
+//    implementation(project(":domain:nfc"))
     //    implementation(project(":feature:foryou"))
 //    implementation(project(":feature:bookmarks"))
 //    implementation(project(":feature:topic"))

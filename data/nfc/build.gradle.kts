@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.codelab.tapandpay.core.data"
+    namespace = "com.codelab.tapandpay.data.nfc"
     testOptions {
         unitTests {
             isIncludeAndroidResources = true

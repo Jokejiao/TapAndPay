@@ -1,5 +1,7 @@
 package com.codelab.nfc
 
-//interface NfcRepository {
-//    fun
-//}
+interface NfcRepository {
+    fun startNfcReader()
+
+    fun stopNfcReader()
+}
