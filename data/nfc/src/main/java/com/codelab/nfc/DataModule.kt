@@ -1,5 +1,6 @@
 package com.codelab.nfc
 
+import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
@@ -8,7 +9,7 @@ import dagger.hilt.components.SingletonComponent
 @InstallIn(SingletonComponent::class)
 interface DataModule {
 
-//    @Binds
-//    fun bindsNfcRepository(nfcRepository: DefaultNfcRepository,
-//    ): NfcRepository
+    @Binds
+    fun bindsNfcRepository(nfcRepository: DefaultNfcRepository,
+    ): NfcRepository
 }

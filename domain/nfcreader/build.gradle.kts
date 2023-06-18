@@ -14,3 +14,8 @@ android {
         }
     }
 }
+
+dependencies {
+    implementation("com.google.guava:guava:32.0.0-android")
+    implementation(project(":data:nfc"))
+}
