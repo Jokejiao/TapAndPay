@@ -2,6 +2,7 @@ package com.codelab.tap
 
 import android.app.Activity
 import android.content.Intent
+import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -22,24 +23,28 @@ class TapViewModel @Inject constructor(
     private val saveNfcPayloadUseCase: SaveNfcPayloadUseCase,
 ) : ViewModel() {
 
-    var uiState by mutableStateOf(NfcStatus.NFC_OK)
+    var nfcState by mutableStateOf(NfcStatus.NFC_OK)
+        private set
+
+    var dataState by mutableStateOf(false)
         private set
 
     fun startNfcReader(activity: Activity) {
-        viewModelScope.launch {
-            uiState = startNfcReaderUseCase(activity)
-        }
+        nfcState = startNfcReaderUseCase(activity)
     }
 
-    fun stopNfcReader(activity: Activity) {
-        viewModelScope.launch {
-            stopNfcReaderUseCase(activity)
-        }
-    }
+    fun stopNfcReader(activity: Activity) = stopNfcReaderUseCase(activity)
 
     fun saveNfcPayload(intent: Intent) {
         viewModelScope.launch {
             saveNfcPayloadUseCase(intent)
+            Log.i("ALex", "saveNfcPayloadUseCase return")
+            Log.i("Alex", "set data State true Thread${Thread.currentThread()}")
+            dataState = true
         }
+    }
+
+    fun dataConsumed() {
+        dataState = false
     }
 }

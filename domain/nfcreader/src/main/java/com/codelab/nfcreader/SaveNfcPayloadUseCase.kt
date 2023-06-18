@@ -13,13 +13,15 @@ import com.codelab.nfc.NfcRepository
 import com.codelab.nfcreader.parser.NdefMessageParser
 import com.codelab.nfcreader.parser.ParsedNdefRecord
 import com.codelab.nfcreader.parser.Utils
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class SaveNfcPayloadUseCase @Inject constructor(
+    @DefaultDispatcher private val defaultDispatcher: CoroutineDispatcher,
     private val nfcRepository: NfcRepository
 ) {
-
-    operator fun invoke(intent: Intent) {
+    suspend operator fun invoke(intent: Intent) = withContext(defaultDispatcher) {
         val action = intent.action
         var plainText = ""
 

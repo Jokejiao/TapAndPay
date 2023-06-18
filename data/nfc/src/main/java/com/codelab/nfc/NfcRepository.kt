@@ -1,7 +1,7 @@
 package com.codelab.nfc
 
 interface NfcRepository {
-    fun setNfcPlainText(plainText: String)
+    suspend fun setNfcPlainText(plainText: String)
 
-    fun getNfcPlainText(): String
+    suspend fun getNfcPlainText(): String
 }

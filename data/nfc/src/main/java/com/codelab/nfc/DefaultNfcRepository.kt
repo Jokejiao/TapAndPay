@@ -7,11 +7,11 @@ class DefaultNfcRepository @Inject constructor(
   private val nfcInMemoryDataSource: NfcInMemoryDataSource
 ) : NfcRepository {
 
-    override fun setNfcPlainText(plainText: String) {
+    override suspend fun setNfcPlainText(plainText: String) {
         nfcInMemoryDataSource.setNfcPlainText(plainText)
     }
 
-    override fun getNfcPlainText(): String {
+    override suspend fun getNfcPlainText(): String {
         return nfcInMemoryDataSource.getNfcPlainText()
     }
 }
