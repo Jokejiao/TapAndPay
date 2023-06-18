@@ -1,6 +1,7 @@
 package com.codelab.tap
 
 import android.app.Activity
+import android.content.Intent
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -31,6 +32,12 @@ class TapViewModel @Inject constructor(
     fun stopNfcReader(activity: Activity) {
         viewModelScope.launch {
             stopNfcReaderUseCase(activity)
+        }
+    }
+
+    fun saveNfcPayload(intent: Intent) {
+        viewModelScope.launch {
+
         }
     }
 }

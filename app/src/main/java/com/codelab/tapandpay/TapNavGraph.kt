@@ -1,6 +1,7 @@
 package com.codelab.tapandpay
 
 
+import android.content.Intent
 import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -30,6 +31,7 @@ import kotlinx.coroutines.CoroutineScope
 @Composable
 fun TapNavGraph(
     activity: MainActivity,
+    intent: Intent? = null,
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController(),
     coroutineScope: CoroutineScope = rememberCoroutineScope(),
@@ -44,7 +46,7 @@ fun TapNavGraph(
         modifier = modifier
     ) {
         composable(TapDestinations.TAP_ROUTE) {
-            TapScreen(activity = activity)
+            TapScreen(activity = activity, intent = intent)
         }
         composable(TapDestinations.DATA_ROUTE) {
             DataScreen {
