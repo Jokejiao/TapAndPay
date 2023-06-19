@@ -5,5 +5,4 @@ import dagger.hilt.android.HiltAndroidApp
 
 
 @HiltAndroidApp
-class TapApplication : Application() {
-}
+class TapApplication : Application()

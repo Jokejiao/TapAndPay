@@ -2,8 +2,6 @@ package com.codelab.tapandpay
 
 
 import android.content.Intent
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -12,6 +10,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.codelab.dataholder.DataHolder
+import com.codelab.message.MessageScreen
 import com.codelab.tap.TapScreen
 import kotlinx.coroutines.CoroutineScope
 
@@ -34,22 +34,19 @@ fun TapNavGraph(
         startDestination = startDestination,
         modifier = modifier
     ) {
+        // TODO: move the navigation to the features, like ForYouNavigation.kt
         composable(TapDestinations.TAP_ROUTE) {
             TapScreen(activity = activity, intent = intent, onCardDataAvailable = {
                 navActions.navigateToData()
             })
         }
         composable(TapDestinations.DATA_ROUTE) {
-            DataScreen(onClick = navActions::navigateToMessage)
+            DataScreen(onClick = { navActions.navigateToMessage() }, dataHolder = dataHolder)
         }
         composable(TapDestinations.MESSAGE_ROUTE) {
-            MessageScreen()
+            MessageScreen(dataHolder)
         }
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-private fun MessageScreen() {
-    OutlinedTextField(value = "", onValueChange = {newValue ->  Unit})
-}
+val dataHolder = DataHolder()

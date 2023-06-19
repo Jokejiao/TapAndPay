@@ -71,6 +71,8 @@ android {
 dependencies {
     implementation(project(":feature:tap"))
     implementation(project(":feature:weather"))
+    implementation(project(":feature:message"))
+    implementation(project(":core:data"))
     implementation(project(":domain:nfcreader"))
 //    implementation(project(":domain:nfc"))
     //    implementation(project(":feature:foryou"))

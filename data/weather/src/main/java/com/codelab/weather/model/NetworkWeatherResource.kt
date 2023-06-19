@@ -28,12 +28,12 @@ data class Location(
 ) {
     override fun toString(): String = StringBuilder()
         .append("lat:$lat, ")
-        .append("lon:$lon\n")
+        .append("lon:$lon,\n")
         .append("name:$name, ")
         .append("region:$region, ")
-        .append("country:$country\n")
+        .append("country:$country,\n")
         .append("tz_id:$tz_id, ")
-        .append("localtime_epoch:$localtime_epoch, ")
+        .append("localtime_epoch:$localtime_epoch,\n")
         .append("localtime:$localtime").toString()
 }
 
