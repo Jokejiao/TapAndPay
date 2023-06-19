@@ -15,7 +15,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 fun CardDataScreen(
     modifier: Modifier,
     viewModel: CardDataViewModel = hiltViewModel(),
-    cardData: String = viewModel.cardData
+    cardData: String = viewModel.cardData,
+
 ) {
     // TODO: Using stringResource
     Column(modifier = modifier) {

@@ -25,6 +25,7 @@ fun TapNavGraph(
     navController: NavHostController = rememberNavController(),
     coroutineScope: CoroutineScope = rememberCoroutineScope(),
     startDestination: String = TapDestinations.TAP_ROUTE,
+//    startDestination: String = TapDestinations.DATA_ROUTE,
     navActions: TapNavigationActions = remember(navController) {
         TapNavigationActions(navController)
     }

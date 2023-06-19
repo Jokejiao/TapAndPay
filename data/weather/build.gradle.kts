@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.codelab.tapandpay.domain.nfcreader"
+    namespace = "com.codelab.tapandpay.data.weather"
     testOptions {
         unitTests {
             isIncludeAndroidResources = true
@@ -16,6 +16,8 @@ android {
 }
 
 dependencies {
-    implementation(libs.guava.android)
-    implementation(project(":data:nfc"))
+    implementation(libs.retrofit.core)
+    implementation(libs.retrofit.kotlin.serialization)
+    implementation(libs.kotlinx.serialization.json)
+    implementation(libs.okhttp)
 }
