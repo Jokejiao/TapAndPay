@@ -4,7 +4,6 @@ import android.app.Activity
 import android.app.PendingIntent
 import android.content.Intent
 import android.nfc.NfcAdapter
-import android.util.Log
 import javax.inject.Inject
 
 
@@ -28,7 +27,6 @@ class StartNfcReaderUseCase @Inject constructor(
             return NfcStatus.NFC_DISABLED
         }
 
-        Log.i("Alex", "NFC_OK")
         return NfcStatus.NFC_OK
     }
 }

@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.nfc.NfcAdapter
-import android.util.Log
 
 class NfcStateReceiver(
     val onNfcEnabled: () -> Unit
@@ -27,7 +26,6 @@ class NfcStateReceiver(
         if (!registered) {
             val filter = IntentFilter()
             filter.addAction(NfcAdapter.ACTION_ADAPTER_STATE_CHANGED)
-            Log.i("Alex", "Register receiver:$this")
             context.registerReceiver(this, filter)
             registered = true
         }
@@ -35,7 +33,6 @@ class NfcStateReceiver(
 
     fun unregister(context: Context) {
         if (registered) {
-            Log.i("Alex", "Unregister receiver:$this")
             context.unregisterReceiver(this)
             registered = false
         }

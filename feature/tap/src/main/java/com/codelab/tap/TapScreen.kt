@@ -2,7 +2,6 @@ package com.codelab.tap
 
 import android.app.Activity
 import android.content.Intent
-import android.util.Log
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -64,21 +63,17 @@ fun TapScreen(
         DisposableEffect(lifecycleOwner) {
             // The NFC reader has to restart itself to work if the user turned off and on the NFC
             val receiver = NfcStateReceiver(onNfcEnabled = {
-                Log.i("Alex1", "Restart NFCReader")
                 viewModel.stopNfcReader(activity)
                 viewModel.startNfcReader(activity)
             })
-            Log.i("Alex1", "New receiver:$receiver")
 
             // Create an observer that triggers our remembered callbacks
             // for sending analytics events
             val observer = LifecycleEventObserver { _, event ->
                 if (event == Lifecycle.Event.ON_RESUME) {
-                    Log.i("Alex1", "startNfcReader")
                     receiver.register(activity)
                     viewModel.startNfcReader(activity)
                 } else if (event == Lifecycle.Event.ON_PAUSE) {
-                    Log.i("Alex1", "stopNfcReader")
                     viewModel.stopNfcReader(activity)
                     receiver.unregister(activity)
                 }
@@ -102,7 +97,6 @@ fun TapScreen(
                     }
 
                     NfcStatus.NFC_DISABLED -> {
-                        Log.i("Alex", "NFC is disabled")
                         snackbarHostState.showSnackbar("NFC is disabled")
                     }
 
@@ -112,11 +106,8 @@ fun TapScreen(
         }
     }
 
-    Log.i("Alex", "tap screen refresh once")
-
     LaunchedEffect(intent) {
         if (intent?.extras?.containsKey("NFC") == true) {
-            Log.i("Alex", "Parse card data....")
             nfcIntent = Intent()
             viewModel.saveNfcPayload(intent = intent)
         }
@@ -124,7 +115,6 @@ fun TapScreen(
 
     LaunchedEffect(dataStatus) {
         if (dataStatus) {
-            Log.i("Alex", "data available")
             viewModel.dataConsumed()
             onCardDataAvailable()
         }

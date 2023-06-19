@@ -26,14 +26,12 @@ class SaveNfcPayloadUseCase @Inject constructor(
         var plainText = ""
 
         if (NfcAdapter.ACTION_NDEF_DISCOVERED == intent.action) {
-            Log.i("Alex", "NDEF")
             intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES)?.also { rawMessages ->
                  plainText = makeUpPlainText(rawMessages.map { it as NdefMessage })
             }
         }
 
         if (NfcAdapter.ACTION_TAG_DISCOVERED == action || NfcAdapter.ACTION_TECH_DISCOVERED == action) {
-            Log.i("Alex", "TAG or TECH")
             val empty = ByteArray(0)
             val id = intent.getByteArrayExtra(NfcAdapter.EXTRA_ID)
             val tag = intent.getParcelableExtra<Parcelable>(NfcAdapter.EXTRA_TAG) as Tag?

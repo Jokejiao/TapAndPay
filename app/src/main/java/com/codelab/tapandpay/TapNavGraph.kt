@@ -2,7 +2,6 @@ package com.codelab.tapandpay
 
 
 import android.content.Intent
-import android.util.Log
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.runtime.Composable
@@ -37,14 +36,11 @@ fun TapNavGraph(
     ) {
         composable(TapDestinations.TAP_ROUTE) {
             TapScreen(activity = activity, intent = intent, onCardDataAvailable = {
-                Log.i("Alex", "navigate to data screen")
                 navActions.navigateToData()
             })
         }
         composable(TapDestinations.DATA_ROUTE) {
-            DataScreen {
-                navActions.navigateToMessage()
-            }
+            DataScreen(onClick = navActions::navigateToMessage)
         }
         composable(TapDestinations.MESSAGE_ROUTE) {
             MessageScreen()

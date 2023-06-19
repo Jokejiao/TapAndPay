@@ -20,6 +20,7 @@ class WeatherDataViewModel @Inject constructor(
 //    val uiState: StateFlow<WeatherUiState> = _uiState.asStateFlow()
 //    private val _uiState: MutableStateFlow<String> = MutableStateFlow("")
 //    val uiState: StateFlow<String> = _uiState.asStateFlow()
+    private var weatherData = ""
 
     val weatherState: StateFlow<String> = weatherRepository.currentWeather
         .asResult()
@@ -27,7 +28,9 @@ class WeatherDataViewModel @Inject constructor(
             result ->
             when (result) {
                 is Result.Success -> {
-                    result.data.toString()
+                    weatherData = result.data.toString()
+                    invokeCallback()
+                    weatherData
                 }
 
                 is Result.Loading -> {
@@ -60,6 +63,17 @@ class WeatherDataViewModel @Inject constructor(
 //                _uiState.value = it.toString()
 //            }
 //        }
+    }
+
+    private var dataCallback: ((String) -> Unit)? = null
+
+    fun setDataCallback(cb: (String) -> Unit) {
+        dataCallback = cb
+        invokeCallback()
+    }
+
+    private fun invokeCallback() {
+        if (weatherData.isNotEmpty()) dataCallback?.invoke(weatherData)
     }
 }
 

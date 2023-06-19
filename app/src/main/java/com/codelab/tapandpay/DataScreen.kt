@@ -10,20 +10,23 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.codelab.tap.CardDataScreen
 import com.codelab.weather.WeatherDataScreen
 
 
 @Composable
 fun DataScreen(
-    onClick: () -> Unit
+    onClick: () -> Unit,
+    viewModel: DataScreenViewModel = hiltViewModel(),
+    data: String = viewModel.combinedData
 ) {
     Column(
         modifier = Modifier.fillMaxHeight()
     ) {
         val splitModifier = Modifier.weight(1f)
-        CardDataScreen(splitModifier)
-        WeatherDataScreen(splitModifier)
+        CardDataScreen(splitModifier, onDataAvailable = viewModel::setCardData)
+        WeatherDataScreen(splitModifier, onDataAvailable = viewModel::setWeatherData)
     }
 
     Box(
@@ -31,10 +34,13 @@ fun DataScreen(
     ){
         Button(
             modifier = Modifier.align(Alignment.BottomEnd),
-            onClick = {}
+            onClick = onClick,
+            enabled = data.isNotEmpty(),
         ) {
             Text("Message")
         }
     }
 }
+
+
 

@@ -19,6 +19,8 @@ class CardDataViewModel @Inject constructor(
     var cardData by mutableStateOf("")
         private set
 
+    private var dataCallback: ((String) -> Unit)? = null
+
     init {
         loadCardData()
     }
@@ -26,6 +28,16 @@ class CardDataViewModel @Inject constructor(
     private fun loadCardData() {
         viewModelScope.launch {
             cardData = nfcRepository.getNfcPlainText()
+            invokeCallback()
         }
+    }
+
+    fun setDataCallback(cb: (String) -> Unit) {
+        dataCallback = cb
+        invokeCallback()
+    }
+
+    private fun invokeCallback() {
+        if (cardData.isNotEmpty()) dataCallback?.invoke(cardData)
     }
 }

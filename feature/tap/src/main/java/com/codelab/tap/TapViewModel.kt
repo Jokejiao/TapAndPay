@@ -2,7 +2,6 @@ package com.codelab.tap
 
 import android.app.Activity
 import android.content.Intent
-import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -38,8 +37,6 @@ class TapViewModel @Inject constructor(
     fun saveNfcPayload(intent: Intent) {
         viewModelScope.launch {
             saveNfcPayloadUseCase(intent)
-            Log.i("ALex", "saveNfcPayloadUseCase return")
-            Log.i("Alex", "set data State true Thread${Thread.currentThread()}")
             dataState = true
         }
     }
