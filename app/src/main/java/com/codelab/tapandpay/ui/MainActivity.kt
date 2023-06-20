@@ -9,6 +9,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import com.codelab.tap.nfcIntent
+import com.codelab.tap.nfcIntentName
 import com.codelab.tapandpay.ui.theme.TapAndPayTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -34,8 +35,7 @@ class MainActivity : ComponentActivity() {
 
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
-//        setIntent(intent)
-        intent.putExtra("NFC", true)
+        intent.putExtra(nfcIntentName, true)
         nfcIntent = intent
     }
 }

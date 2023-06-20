@@ -13,9 +13,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.codelab.dataholder.DataHolder
+import com.codelab.tapandpay.feature.message.R
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -26,20 +28,19 @@ fun MessageScreen(
 ) {
     Column(modifier = Modifier.fillMaxHeight()) {
         var number by rememberSaveable { mutableStateOf("") }
-        Text(text = "Type in the mobile phone number:")
+        Text(text = stringResource(id = R.string.type_in_phone_no))
 
         OutlinedTextField(
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
             value = number,
             onValueChange = { number = it },
-            label = { Text("Phone number:") })
+            label = { Text(text = stringResource(id = R.string.phone_no)) })
 
         Button(
-//            modifier = Modifier.align(Alignment.BottomEnd),
             onClick = { viewModel.sendSms(number, dataHolder.getData()) },
             enabled = number.isNotEmpty()
         ) {
-            Text("Send")
+            Text(text = stringResource(id = R.string.send))
         }
     }
 }

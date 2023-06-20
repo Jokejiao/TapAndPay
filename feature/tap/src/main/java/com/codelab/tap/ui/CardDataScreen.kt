@@ -8,8 +8,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.codelab.tapandpay.feature.tap.R
 
 
 @Composable
@@ -24,11 +26,12 @@ fun CardDataScreen(
         viewModel.setDataCallback(onDataAvailable)
     }
 
-    // TODO: Using stringResource
     Column(modifier = modifier) {
-        Text("Card Data1:", fontSize = 20.sp)
-        Text(text = cardData, modifier = Modifier
-            .horizontalScroll(state = rememberScrollState())
-            .verticalScroll(state = rememberScrollState()))
+        Text(text = stringResource(id = R.string.card_data_text), fontSize = 20.sp)
+        Text(
+            text = cardData, modifier = Modifier
+                .horizontalScroll(state = rememberScrollState())
+                .verticalScroll(state = rememberScrollState())
+        )
     }
 }

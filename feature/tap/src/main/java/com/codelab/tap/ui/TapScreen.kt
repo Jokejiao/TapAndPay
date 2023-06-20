@@ -20,6 +20,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment.Companion.Center
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLifecycleOwner
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.Lifecycle
@@ -27,16 +28,24 @@ import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.LifecycleOwner
 import com.codelab.nfcreader.NfcStateReceiver
 import com.codelab.nfcreader.NfcStatus
+import com.codelab.tapandpay.feature.tap.R
 
 
+/* MainActivity onNewIntent() sets nfcIntent to notify the NFC data is available.
+* Just take the tap card action as a normal user UI event, so the MainActivity as a
+* delegate(based on historical reason) just needs to pass the UI data(Intent)
+*  to TapScreen straight away. */
 var nfcIntent: Intent by mutableStateOf(Intent())
+
+/* Indicating the intent is exactly for NFC, not the initial empty one or others */
+const val nfcIntentName = "NFC"
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TapScreen(
     activity: Activity,
     modifier: Modifier = Modifier,
-    intent: Intent? = null,
+    intent: Intent,
     lifecycleOwner: LifecycleOwner = LocalLifecycleOwner.current,
     viewModel: TapViewModel = hiltViewModel(),
     nfcStatus: NfcStatus = viewModel.nfcState,
@@ -56,12 +65,12 @@ fun TapScreen(
                 .padding(paddingValues = it)
         ) {
             Text(
-                text = "Tap Card", fontSize = 30.sp
+                text = stringResource(id = R.string.tap_card_text), fontSize = 30.sp
             )
         }
 
         DisposableEffect(lifecycleOwner) {
-            // The NFC reader has to restart itself to work if the user turned off and on the NFC
+            // The NFC reader has to restart itself to work if the user turned the NFC off and then on
             val receiver = NfcStateReceiver(onNfcEnabled = {
                 viewModel.stopNfcReader(activity)
                 viewModel.startNfcReader(activity)
@@ -107,7 +116,7 @@ fun TapScreen(
     }
 
     LaunchedEffect(intent) {
-        if (intent?.extras?.containsKey("NFC") == true) {
+        if (intent.extras?.containsKey(nfcIntentName) == true) {
             nfcIntent = Intent()
             viewModel.saveNfcPayload(intent = intent)
         }

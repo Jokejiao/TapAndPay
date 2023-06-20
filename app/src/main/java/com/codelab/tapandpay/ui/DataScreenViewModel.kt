@@ -10,7 +10,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DataScreenViewModel @Inject constructor(
-): ViewModel() {
+) : ViewModel() {
 
     private var cardData: String = ""
     private var weatherData: String = ""

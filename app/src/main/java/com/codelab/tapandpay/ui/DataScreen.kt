@@ -10,6 +10,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.codelab.dataholder.DataHolder
 import com.codelab.tap.CardDataScreen
@@ -33,17 +34,16 @@ fun DataScreen(
 
     Box(
         modifier = Modifier.fillMaxSize()
-    ){
+    ) {
         Button(
             modifier = Modifier.align(Alignment.BottomEnd),
-//            onClick = onClick,
             onClick = {
-                      dataHolder.setData(data)
-                      onClick()
+                dataHolder.setData(data)
+                onClick()
             },
             enabled = data.isNotEmpty(),
         ) {
-            Text("Message")
+            Text(text = stringResource(id = R.string.message_button_text))
         }
     }
 }
