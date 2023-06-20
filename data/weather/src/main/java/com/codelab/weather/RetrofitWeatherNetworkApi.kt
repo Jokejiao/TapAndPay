@@ -1,6 +1,7 @@
 package com.codelab.weather
 
 
+import com.codelab.tapandpay.data.weather.BuildConfig
 import com.codelab.weather.model.NetworkWeatherResource
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.coroutines.CoroutineDispatcher
@@ -70,7 +71,8 @@ class RetrofitWeatherNetwork @Inject constructor(
     override val currentWeather = flow {
         emit(
             networkApi.getCurrentWeather(
-                key = "4e083895d01a427faf3184618231806",
+//                key = "4e083895d01a427faf3184618231806",
+                key = BuildConfig.WEATHER_API_KEY,
                 location = "Auckland"
             )
         )
