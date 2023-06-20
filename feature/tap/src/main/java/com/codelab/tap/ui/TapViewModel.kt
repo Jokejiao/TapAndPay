@@ -1,4 +1,4 @@
-package com.codelab.tap
+package com.codelab.tap.ui
 
 import android.app.Activity
 import android.content.Intent

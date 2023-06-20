@@ -1,4 +1,4 @@
-package com.codelab.message
+package com.codelab.message.ui
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight

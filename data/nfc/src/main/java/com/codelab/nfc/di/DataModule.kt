@@ -1,5 +1,7 @@
-package com.codelab.nfc
+package com.codelab.nfc.di
 
+import com.codelab.nfc.DefaultNfcRepository
+import com.codelab.nfc.NfcRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

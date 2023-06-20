@@ -1,9 +1,10 @@
-package com.codelab.message
+package com.codelab.message.navigation
 
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import com.codelab.dataholder.DataHolder
+import com.codelab.message.ui.MessageScreen
 
 
 const val messageNavigationRoute = "message_user"

@@ -1,4 +1,4 @@
-package com.codelab.tapandpay
+package com.codelab.tapandpay.ui
 
 
 import androidx.compose.foundation.layout.Box
@@ -13,8 +13,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.codelab.dataholder.DataHolder
-import com.codelab.tap.CardDataScreen
-import com.codelab.weather.WeatherDataScreen
+import com.codelab.tap.ui.CardDataScreen
+import com.codelab.tapandpay.R
+import com.codelab.weather.ui.WeatherDataScreen
 
 
 @Composable

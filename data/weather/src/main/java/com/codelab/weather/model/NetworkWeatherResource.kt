@@ -14,7 +14,6 @@ data class NetworkWeatherResource(
         .toString()
 }
 
-
 @Serializable
 data class Location(
     val lat: Float,
@@ -39,14 +38,8 @@ data class Location(
 
 @Serializable
 data class Current(
-//    val last_updated: String,
     val temp_c: Float,
     val condition: Condition,
-//    val wind_kph: Float,
-//    val wind_dir: String,
-//    val precip_mm: Float,
-//    val humidity: Int
-//    val feelslike_c: Float,
     val uv: Float,
 ) {
     override fun toString(): String = StringBuilder()

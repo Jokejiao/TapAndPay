@@ -1,4 +1,4 @@
-package com.codelab.tapandpay
+package com.codelab.tapandpay.ui
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,8 +8,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
-import com.codelab.tap.nfcIntent
-import com.codelab.tap.nfcIntentName
+import com.codelab.tap.ui.nfcIntent
+import com.codelab.tap.ui.nfcIntentName
+import com.codelab.tapandpay.navigation.TapNavGraph
 import com.codelab.tapandpay.ui.theme.TapAndPayTheme
 import dagger.hilt.android.AndroidEntryPoint
 

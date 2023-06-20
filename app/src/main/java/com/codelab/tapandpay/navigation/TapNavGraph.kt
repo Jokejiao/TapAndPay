@@ -1,4 +1,4 @@
-package com.codelab.tapandpay
+package com.codelab.tapandpay.navigation
 
 
 import android.content.Intent
@@ -8,10 +8,11 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import com.codelab.dataholder.DataHolder
-import com.codelab.message.messageScreen
-import com.codelab.message.navigateToMessage
-import com.codelab.tap.tapNavigationRoute
-import com.codelab.tap.tapScreen
+import com.codelab.message.navigation.messageScreen
+import com.codelab.message.navigation.navigateToMessage
+import com.codelab.tap.navigation.tapNavigationRoute
+import com.codelab.tap.navigation.tapScreen
+import com.codelab.tapandpay.ui.MainActivity
 
 
 @Composable

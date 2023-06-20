@@ -2,9 +2,9 @@ package com.codelab.smssender
 
 import android.content.Context
 import android.content.Intent
+import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
-
 
 class SendSmsUseCase @Inject constructor(
     @ApplicationContext private val context: Context,

@@ -1,7 +1,10 @@
-package com.codelab.weather
+package com.codelab.weather.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.codelab.weather.Result
+import com.codelab.weather.WeatherRepository
+import com.codelab.weather.asResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -18,14 +21,13 @@ class WeatherDataViewModel @Inject constructor(
 //    private val _uiState: MutableStateFlow<WeatherUiState> =
 //        MutableStateFlow(WeatherUiState.Success(""))
 //    val uiState: StateFlow<WeatherUiState> = _uiState.asStateFlow()
-//    private val _uiState: MutableStateFlow<String> = MutableStateFlow("")
-//    val uiState: StateFlow<String> = _uiState.asStateFlow()
+
     private var weatherData = ""
 
+    // TODO: Return UI states instead of Strings
     val weatherState: StateFlow<String> = weatherRepository.currentWeather
         .asResult()
-        .map {
-            result ->
+        .map { result ->
             when (result) {
                 is Result.Success -> {
                     weatherData = result.data.toString()
@@ -34,36 +36,29 @@ class WeatherDataViewModel @Inject constructor(
                 }
 
                 is Result.Loading -> {
-                    "Loading"
+                    "Loading..."
                 }
 
                 is Result.Error -> {
                     "Network Error"
                 }
             }
-//        }
-//        .map {it.toString()}
-//        .catch { emit("Error") }.map {
-//            it
-    }.stateIn(
-        scope = viewModelScope,
-        started = SharingStarted.WhileSubscribed(5000),
-        initialValue = ""
-    )
+        }.stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(stopTimeout),
+            initialValue = ""
+        )
 
-    init {
+//    init {
 //        viewModelScope.launch {
-////            _uiState.value = WeatherUiState.Loading
-//            _uiState.value = "Loading"
+//            _uiState.value = WeatherUiState.Loading
 //            weatherRepository.currentWeather.catch {
-////                _uiState.value = WeatherUiState.Error(it)
-//                _uiState.value = "Error"
+//                _uiState.value = WeatherUiState.Error(it)
 //            }.collect {
-////                _uiState.value = WeatherUiState.Success(it.toString())
-//                _uiState.value = it.toString()
+//                _uiState.value = WeatherUiState.Success(it.toString())
 //            }
 //        }
-    }
+//    }
 
     private var dataCallback: ((String) -> Unit)? = null
 
@@ -75,11 +70,17 @@ class WeatherDataViewModel @Inject constructor(
     private fun invokeCallback() {
         if (weatherData.isNotEmpty()) dataCallback?.invoke(weatherData)
     }
+
+    companion object {
+        const val stopTimeout = 5000L
+    }
 }
 
+/*
 sealed interface WeatherUiState {
     data class Success(val weatherData: String) : WeatherUiState
     data class Error(val exception: Throwable) : WeatherUiState
 
     object Loading: WeatherUiState
 }
+*/

@@ -1,4 +1,4 @@
-package com.codelab.weather
+package com.codelab.weather.di
 
 import dagger.Module
 import dagger.Provides

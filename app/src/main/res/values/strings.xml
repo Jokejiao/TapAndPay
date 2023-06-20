@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">TapAndPay</string>
+    <string name="message_button_text">Message</string>
 </resources>

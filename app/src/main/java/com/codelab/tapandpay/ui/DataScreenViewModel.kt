@@ -1,4 +1,4 @@
-package com.codelab.tapandpay
+package com.codelab.tapandpay.ui
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf

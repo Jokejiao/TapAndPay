@@ -10,12 +10,6 @@ android {
         buildConfig = true
     }
     namespace = "com.codelab.tapandpay.data.weather"
-    testOptions {
-        unitTests {
-            isIncludeAndroidResources = true
-            isReturnDefaultValues = true
-        }
-    }
 }
 
 dependencies {

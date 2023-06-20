@@ -7,9 +7,10 @@ import android.nfc.NfcAdapter
 import android.nfc.Tag
 import android.nfc.tech.MifareClassic
 import android.nfc.tech.MifareUltralight
+import android.os.Build
 import android.os.Parcelable
-import android.util.Log
 import com.codelab.nfc.NfcRepository
+import com.codelab.nfcreader.di.DefaultDispatcher
 import com.codelab.nfcreader.parser.NdefMessageParser
 import com.codelab.nfcreader.parser.ParsedNdefRecord
 import com.codelab.nfcreader.parser.Utils
@@ -21,20 +22,35 @@ class SaveNfcPayloadUseCase @Inject constructor(
     @DefaultDispatcher private val defaultDispatcher: CoroutineDispatcher,
     private val nfcRepository: NfcRepository
 ) {
+
     suspend operator fun invoke(intent: Intent) = withContext(defaultDispatcher) {
         val action = intent.action
         var plainText = ""
 
         if (NfcAdapter.ACTION_NDEF_DISCOVERED == intent.action) {
-            intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES)?.also { rawMessages ->
-                 plainText = makeUpPlainText(rawMessages.map { it as NdefMessage })
+            val rawMessages = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                intent.getParcelableArrayExtra(
+                    NfcAdapter.EXTRA_NDEF_MESSAGES,
+                    NdefMessage::class.java
+                )
+            } else {
+                @Suppress("DEPRECATION")
+                intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES)
             }
+
+            plainText = makeUpPlainText(rawMessages?.map { it as NdefMessage })
         }
 
         if (NfcAdapter.ACTION_TAG_DISCOVERED == action || NfcAdapter.ACTION_TECH_DISCOVERED == action) {
             val empty = ByteArray(0)
             val id = intent.getByteArrayExtra(NfcAdapter.EXTRA_ID)
-            val tag = intent.getParcelableExtra<Parcelable>(NfcAdapter.EXTRA_TAG) as Tag?
+            val parcelable = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                intent.getParcelableExtra(NfcAdapter.EXTRA_TAG, Parcelable::class.java)
+            } else {
+                @Suppress("DEPRECATION")
+                intent.getParcelableExtra(NfcAdapter.EXTRA_TAG)
+            }
+            val tag = parcelable as Tag?
             val payload = dumpTagData(tag).toByteArray()
             val record = NdefRecord(NdefRecord.TNF_UNKNOWN, empty, id, payload)
             val msg = NdefMessage(arrayOf(record))

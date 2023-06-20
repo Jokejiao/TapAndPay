@@ -1,4 +1,4 @@
-package com.codelab.tap
+package com.codelab.tap.ui
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf

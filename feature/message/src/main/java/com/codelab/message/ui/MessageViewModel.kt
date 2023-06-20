@@ -1,4 +1,4 @@
-package com.codelab.message
+package com.codelab.message.ui
 
 import androidx.lifecycle.ViewModel
 import com.codelab.smssender.SendSmsUseCase
@@ -8,11 +8,7 @@ import javax.inject.Inject
 @HiltViewModel
 class MessageViewModel @Inject constructor(
     private val sendSmsUseCase: SendSmsUseCase
-): ViewModel() {
+) : ViewModel() {
 
-//    fun sendSms(phoneNo: String, content: String) = viewModelScope.launch {
-//        sendSmsUseCase(phoneNo, content)
-//    }
-
-    fun sendSms(phoneNo: String, content: String) =sendSmsUseCase(phoneNo, content)
+    fun sendSms(phoneNo: String, content: String) = sendSmsUseCase(phoneNo, content)
 }
