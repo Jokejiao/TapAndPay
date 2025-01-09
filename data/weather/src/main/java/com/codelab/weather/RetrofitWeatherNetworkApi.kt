@@ -5,6 +5,7 @@ import com.codelab.tapandpay.data.weather.BuildConfig
 import com.codelab.weather.di.IoDispatcher
 import com.codelab.weather.model.NetworkWeatherResource
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
+import dagger.Provides
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn

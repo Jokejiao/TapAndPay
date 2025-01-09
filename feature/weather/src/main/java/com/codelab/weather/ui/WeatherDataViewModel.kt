@@ -40,7 +40,7 @@ class WeatherDataViewModel @Inject constructor(
                 }
 
                 is Result.Error -> {
-                    "Network Error"
+                    "Network Error: ${result.exception}"
                 }
             }
         }.stateIn(

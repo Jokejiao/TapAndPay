@@ -20,7 +20,7 @@ enum class TapFlavor(val dimension: FlavorDimension, val applicationIdSuffix: St
 }
 
 fun configureFlavors(
-    commonExtension: CommonExtension<*, *, *, *>,
+    commonExtension: CommonExtension<*, *, *, *, *, *>,
     flavorConfigurationBlock: ProductFlavor.(flavor: TapFlavor) -> Unit = {}
 ) {
     commonExtension.apply {

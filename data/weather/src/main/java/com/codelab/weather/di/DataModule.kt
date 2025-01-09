@@ -11,12 +11,15 @@ import dagger.hilt.components.SingletonComponent
 
 @Module
 @InstallIn(SingletonComponent::class)
-interface DataModule {
+abstract class DataModule {
 
     @Binds
-    fun RetrofitWeatherNetwork.binds(): WeatherDataSource
+    abstract fun RetrofitWeatherNetwork(
+        retrofitWeatherNetwork: RetrofitWeatherNetwork
+    ): WeatherDataSource
 
     @Binds
-    fun bindsWeatherRepository(nfcRepository: DefaultWeatherRepository,
+    abstract fun bindWeatherRepository(
+        defaultWeatherRepository: DefaultWeatherRepository
     ): WeatherRepository
 }

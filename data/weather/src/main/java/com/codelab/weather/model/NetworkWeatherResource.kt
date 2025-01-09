@@ -40,12 +40,10 @@ data class Location(
 data class Current(
     val temp_c: Float,
     val condition: Condition,
-    val uv: Float,
 ) {
     override fun toString(): String = StringBuilder()
         .append("temp_c:$temp_c, ")
         .append(condition)
-        .append("uv:$uv")
         .toString()
 }
 

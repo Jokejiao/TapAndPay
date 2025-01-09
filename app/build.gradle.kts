@@ -5,6 +5,7 @@ plugins {
     id("tapandpay.android.application.compose")
     id("tapandpay.android.hilt")
     id("tapandpay.android.application.flavors")
+    alias(libs.plugins.compose.compiler)
 }
 
 android {
